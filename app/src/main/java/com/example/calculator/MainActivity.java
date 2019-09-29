@@ -9,26 +9,24 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView tvExpression,tvResult;
+    public static TextView tvExpression,tvResult;
     private Button btOne,btTwo,btThree,btFour,btFive,btSix,btSeven,btEight,btNine,btZero,btDot,btAdd,btSub,btDiv,btMul,btEqual,btCe;
-    double v1,v2;
     ImageButton btDel;
     private  Button btRoot,btPow,btMod;
     Boolean opAdd;
-    private static final char ADDITION = '+';
-    private static final char SUBTRACTION = '-';
-    private static final char MULTIPLICATION = '*';
-    private static final char DIVISION = '/';
-    private  static  final char POW ='^';
-    private  static  final char ROOT = 's';
-    private  static  final char MOD = '%';
-    private  static  final char NOT ='N';
+    public static final char ADDITION = '+';
+    public static final char SUBTRACTION = '-';
+    public static final char MULTIPLICATION = '*';
+    public static final char DIVISION = '/';
+    public   static  final char POW ='^';
+    public   static  final char ROOT = 's';
+    public   static  final char MOD = '%';
+    public   static  final char NOT ='N';
 
-    private char CURRENT_ACTION =NOT;
-    String secondValue = new String();
-    double valueOne =Double.NaN;
-    double valueTwo;
-
+    public static char CURRENT_ACTION =NOT;
+    public static String secondValue = new String();
+    public static double valueOne =Double.NaN;
+    public static double valueTwo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -236,8 +234,9 @@ public class MainActivity extends AppCompatActivity {
                     //tvExpression.setText(tvExpression.getText()+""+valueOne);
                     valueOne = Math.sqrt(valueOne);
                 }
-
+                if(valueOne!=-1)
                 tvResult.setText(""+valueOne);
+                else tvResult.setText(""+"division by zero");
                 // tvExpression.setText(tvExpression.getText()+""+valueTwo);
                 valueOne=Double.NaN;
                 CURRENT_ACTION =NOT;
@@ -303,8 +302,12 @@ public class MainActivity extends AppCompatActivity {
                 valueOne = this.valueOne - valueTwo;
             else if(CURRENT_ACTION == MULTIPLICATION)
                 valueOne = this.valueOne * valueTwo;
-            else if(CURRENT_ACTION == DIVISION)
+            else if(CURRENT_ACTION == DIVISION) {
+                if(valueTwo!=0)
                 valueOne = this.valueOne / valueTwo;
+                else
+                    valueOne =-1;
+            }
             else if(CURRENT_ACTION==ROOT)
                 valueOne = Math.sqrt(this.valueOne);
             else if(CURRENT_ACTION == POW)
