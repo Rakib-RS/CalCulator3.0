@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     public static String secondValue = new String();
     public static double valueOne =Double.NaN;
     public static double valueTwo;
-
+    //public  Controller controller = new Controller();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -230,11 +230,16 @@ public class MainActivity extends AppCompatActivity {
                     CharSequence s= tvExpression.getText();
                     s=s.subSequence(1,s.length());
                     valueOne =Double.parseDouble(s+"");
-                    tvResult.setText("ok");
+                    //tvResult.setText("ok");
                     //tvExpression.setText(tvExpression.getText()+""+valueOne);
-                    valueOne = Math.sqrt(valueOne);
+                    if (valueOne<0)
+                        tvResult.setText("Negative number");
+                    else {
+                        valueOne = Math.sqrt(valueOne);
+                        tvResult.setText(""+valueOne);
+                    }
                 }
-                if(valueOne!=-1)
+               else if(valueOne!=-1)
                 tvResult.setText(""+valueOne);
                 else tvResult.setText(""+"division by zero");
                 // tvExpression.setText(tvExpression.getText()+""+valueTwo);
