@@ -9,43 +9,31 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView tvExpression, tvResult;
-    private Button btOne, btTwo, btThree, btFour, btFive, btSix, btSeven, btEight, btNine, btZero, btDot, btAdd, btSub, btDiv, btMul, btEqual, btCe;
-    double v1, v2;
+    private TextView tvExpression,tvResult;
+    private Button btOne,btTwo,btThree,btFour,btFive,btSix,btSeven,btEight,btNine,btZero,btDot,btAdd,btSub,btDiv,btMul,btEqual,btCe;
+    double v1,v2;
     ImageButton btDel;
-    private Button btRoot, btPow, btMod;
+    private  Button btRoot,btPow,btMod;
     Boolean opAdd;
     private static final char ADDITION = '+';
     private static final char SUBTRACTION = '-';
     private static final char MULTIPLICATION = '*';
     private static final char DIVISION = '/';
-    private static final char POW = '^';
-    private static final char ROOT = 's';
-    private static final char MOD = '%';
-    private static final char NOT = 'N';
+    private  static  final char POW ='^';
+    private  static  final char ROOT = 's';
+    private  static  final char MOD = '%';
+    private  static  final char NOT ='N';
 
-    private char CURRENT_ACTION = NOT;
+    private char CURRENT_ACTION =NOT;
     String secondValue = new String();
-
-    double valueOne = Double.NaN;
+    double valueOne =Double.NaN;
     double valueTwo;
 
-    // private DecimalFormat decimalFormat;
-
-    /*public  MainActivity(double x ,double y){
-        this.valueOne =x;
-        this.valueTwo =y;
-    }*/
-    public void setValue() {
-        this.tvExpression.setText(tvExpression.getText() + "" + this.valueTwo);
-        this.CURRENT_ACTION = this.ADDITION;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         btZero = (Button) findViewById(R.id.tvZero);
         btOne = (Button) findViewById(R.id.tvOne);
         btTwo = (Button) findViewById(R.id.tvTwo);
@@ -57,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
         btEight = (Button) findViewById(R.id.tvEight);
         btNine = (Button) findViewById(R.id.tvNine);
         btDot = (Button) findViewById(R.id.tvDot);
-        btRoot = (Button) findViewById(R.id.btRoot);
-        btPow = (Button) findViewById(R.id.btPower);
-        btMod = (Button) findViewById(R.id.btMod);
+        btRoot =(Button) findViewById(R.id.btRoot);
+        btPow =(Button) findViewById(R.id.btPower);
+        btMod =(Button) findViewById(R.id.btMod);
 
         btAdd = (Button) findViewById(R.id.tvPlus);
         btSub = (Button) findViewById(R.id.tvMinus);
@@ -71,21 +59,21 @@ public class MainActivity extends AppCompatActivity {
 
         btDel = (ImageButton) findViewById(R.id.tvBack);
         btCe = (Button) findViewById(R.id.tvClear);
-
+        tvExpression =(TextView) findViewById(R.id.tvExpression) ;
         btDot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvExpression.setText(tvExpression.getText() + ".");
+                tvExpression.setText(tvExpression.getText()+".");
                 if (!Double.isNaN(valueOne))
-                    secondValue += '.';
+                    secondValue+='.';
             }
         });
         btZero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvExpression.setText(tvExpression.getText() + "0");
+                tvExpression.setText(tvExpression.getText()+"0");
                 if (!Double.isNaN(valueOne))
-                    secondValue += '0';
+                    secondValue+='0';
             }
         });
         btOne.setOnClickListener(new View.OnClickListener() {
@@ -300,41 +288,44 @@ public class MainActivity extends AppCompatActivity {
                 secondValue="";
             }
         });
+
     }
     public void computeCalculation() {
-        if (!Double.isNaN(valueOne)) {
+        if(!Double.isNaN(valueOne)) {
             //CharSequence sequence  =tvExpression.getText();
             //tvExpression.setText(null);
             //binding.editText.setText(null);
-            valueTwo = Double.parseDouble(secondValue);
+            valueTwo =Double.parseDouble(secondValue);
 
-            if (CURRENT_ACTION == ADDITION)
+            if(CURRENT_ACTION == ADDITION)
                 valueOne = this.valueOne + valueTwo;
-            else if (CURRENT_ACTION == SUBTRACTION)
+            else if(CURRENT_ACTION == SUBTRACTION)
                 valueOne = this.valueOne - valueTwo;
-            else if (CURRENT_ACTION == MULTIPLICATION)
+            else if(CURRENT_ACTION == MULTIPLICATION)
                 valueOne = this.valueOne * valueTwo;
-            else if (CURRENT_ACTION == DIVISION)
+            else if(CURRENT_ACTION == DIVISION)
                 valueOne = this.valueOne / valueTwo;
-            else if (CURRENT_ACTION == ROOT)
+            else if(CURRENT_ACTION==ROOT)
                 valueOne = Math.sqrt(this.valueOne);
-            else if (CURRENT_ACTION == POW)
-                valueOne = Math.pow(this.valueOne, valueTwo);
-            else if (CURRENT_ACTION == MOD)
-                valueOne = valueOne % valueTwo;
+            else if(CURRENT_ACTION == POW)
+                valueOne =Math.pow(this.valueOne,valueTwo);
+            else if(CURRENT_ACTION == MOD)
+                valueOne =valueOne%valueTwo;
 
-        } else {
-            try {
+        }
+        else {
+            try{
 
-                valueOne = Double.parseDouble(tvExpression.getText() + "");
+                valueOne = Double.parseDouble(tvExpression.getText()+"");
                    /* if(CURRENT_ACTION==ROOT){
                         CharSequence s= tvExpression.getText();
                         s=s.subSequence(1,s.length());
                         valueOne =Double.parseDouble(s+"");
                         tvResult.setText("ok");
                     }*/
-            } catch (Exception e) {
             }
+            catch (Exception e){}
         }
     }
+
 }
